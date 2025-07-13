@@ -17,7 +17,7 @@ All colors MUST be HSL.
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 222.2 47.4% 11.2%;
+    --primary: 210 100% 25%;
     --primary-foreground: 210 40% 98%;
 
     --secondary: 210 40% 96.1%;
@@ -35,6 +35,26 @@ All colors MUST be HSL.
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
     --ring: 222.2 84% 4.9%;
+
+    /* Medical theme colors */
+    --medical-primary: 210 100% 25%;
+    --medical-primary-foreground: 210 40% 98%;
+    --medical-secondary: 210 25% 95%;
+    --medical-accent: 195 100% 85%;
+    
+    /* Patient theme colors */
+    --patient-primary: 142 76% 36%;
+    --patient-primary-foreground: 210 40% 98%;
+    --patient-secondary: 142 25% 95%;
+    --patient-accent: 142 100% 85%;
+
+    /* Status colors */
+    --success: 142 76% 36%;
+    --success-foreground: 210 40% 98%;
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 0%;
+    --info: 210 100% 50%;
+    --info-foreground: 210 40% 98%;
 
     --radius: 0.5rem;
 

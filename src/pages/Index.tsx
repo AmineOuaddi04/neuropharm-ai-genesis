@@ -18,14 +18,17 @@ const Index = () => {
             <span className="text-xl font-bold text-gray-900">NeuroPharm-AI</span>
           </div>
           <nav className="hidden md:flex items-center space-x-6">
-            <Link to="/dashboard" className="text-gray-600 hover:text-blue-600 transition-colors">Dashboard</Link>
-            <Link to="/search" className="text-gray-600 hover:text-blue-600 transition-colors">Medicamentos</Link>
-            <Link to="/reports" className="text-gray-600 hover:text-blue-600 transition-colors">Informes</Link>
-            <Link to="/medical" className="text-gray-600 hover:text-blue-600 transition-colors">Panel Médico</Link>
+            <a href="#features" className="text-gray-600 hover:text-blue-600 transition-colors">Características</a>
+            <a href="#about" className="text-gray-600 hover:text-blue-600 transition-colors">Acerca de</a>
+            <a href="#contact" className="text-gray-600 hover:text-blue-600 transition-colors">Contacto</a>
           </nav>
           <div className="flex items-center space-x-2">
-            <Button variant="outline" size="sm">Iniciar Sesión</Button>
-            <Button size="sm">Registrarse</Button>
+            <Button variant="outline" size="sm" asChild>
+              <Link to="/login">Iniciar Sesión</Link>
+            </Button>
+            <Button size="sm" asChild>
+              <Link to="/login">Acceder</Link>
+            </Button>
           </div>
         </div>
       </header>
@@ -47,18 +50,18 @@ const Index = () => {
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Button size="lg" className="text-lg px-8" asChild>
-            <Link to="/dashboard">
-              Comenzar <ArrowRight className="ml-2 w-5 h-5" />
+            <Link to="/login">
+              Acceso Pacientes <ArrowRight className="ml-2 w-5 h-5" />
             </Link>
           </Button>
-          <Button variant="outline" size="lg" className="text-lg px-8">
-            Ver Demo
+          <Button variant="outline" size="lg" className="text-lg px-8" asChild>
+            <Link to="/login">Para Profesionales</Link>
           </Button>
         </div>
       </section>
 
       {/* Features Grid */}
-      <section className="container mx-auto px-4 py-16">
+      <section id="features" className="container mx-auto px-4 py-16">
         <h2 className="text-3xl font-bold text-center mb-12">Características Principales</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <Card className="hover:shadow-lg transition-shadow">
@@ -145,7 +148,7 @@ const Index = () => {
             Únete a la nueva era de la medicina personalizada
           </p>
           <Button size="lg" variant="secondary" className="text-lg px-8" asChild>
-            <Link to="/dashboard">
+            <Link to="/login">
               Empezar Ahora <ArrowRight className="ml-2 w-5 h-5" />
             </Link>
           </Button>
