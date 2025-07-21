@@ -1,39 +1,36 @@
 name: Deploy to GitHub Pages
 
 on:
-  push:
-    branches: [ main ]
-
-permissions:
-  pages: write  # Permiso para escribir en GitHub Pages
-  contents: write  # Permiso para escribir en los contenidos del repositorio
-  id-token: write  # Permiso para escribir el id-token necesario para algunas operaciones de despliegue
+  workflow_dispatch:
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
-    environment:
-      name: github-pages  # Aquí defines el entorno de GitHub Pages
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3  # Este paso obtiene el código fuente del repositorio
+      - uses: actions/checkout@v3
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
+      - uses: actions/setup-node@v3
         with:
-          node-version: '18'  # Usamos la versión de Node.js 18 para instalar dependencias
+          node-version: '18'
 
-      - name: Install dependencies
-        run: npm install  # Instalar las dependencias de Node.js
+      - run: npm install
 
-      - name: Build the project
-        run: npm run build  # Construir el proyecto con Vite
+      - run: npm run build
+
+      - name: Copy index.html to 404.html
+        run: cp dist/index.html dist/404.html
+
+      - name: Debug build output
+        run: |
+          echo "Listing contents of the root directory..."
+          ls -la
+          echo "Listing contents of the dist directory..."
+          ls -R dist
 
       - name: Deploy to GitHub Pages
-        uses: skywarth/vite-github-pages-deployer@v1.5.0
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          public_base_path: /neuropharm-ai-genesis/  # Reemplaza con el nombre de tu repositorio
-          build_path: ./dist  # Ruta donde se generan los archivos construidos por Vite
-          package_manager: npm  # Usamos npm como gestor de paquetes
+          github_token: ${{ secrets.GH_PAT }}
+          publish_dir: ./dist
+          cname: https://amineouaddi04.github.io/neuropharm-ai-genesis/
+          force_orphan: true
