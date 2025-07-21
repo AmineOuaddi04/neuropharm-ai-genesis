@@ -1,19 +1,37 @@
 name: Deploy to GitHub Pages
+
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main  # O cualquier rama que quieras usar para el despliegue
+
 permissions:
-  pages: write
-  contents: write
+  pages: write  # Permiso para escribir en GitHub Pages
+  contents: write  # Permiso para modificar los contenidos del repositorio
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with: node-version: 18
-      - uses: skywarth/vite-github-pages-deployer@v1.5.0
+      - name: Checkout repository
+        uses: actions/checkout@v3  # Este paso obtiene el código fuente del repositorio
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
-          public_base_path: /neuropharm-ai-genesis/
-          build_path: ./dist
-          package_manager: npm
+          node-version: '18'  # Usamos la versión de Node.js 18 para instalar dependencias
+
+      - name: Install dependencies
+        run: npm install  # Instalar las dependencias de Node.js
+
+      - name: Build the project
+        run: npm run build  # Construir el proyecto con Vite
+
+      - name: Deploy to GitHub Pages
+        uses: jamesgeorge007/github-pages-deploy-action@v4.2.0  # Acción para desplegar a GitHub Pages
+        with:
+          branch: gh-pages  # Rama donde se publicarán los archivos (usualmente gh-pages)
+          folder: dist  # Carpeta que contiene los archivos generados por Vite
+        env:
+          GH_TOKEN: ${{ secrets.GH_PAT }}  # Usar el token de acceso como secreto para autenticación
