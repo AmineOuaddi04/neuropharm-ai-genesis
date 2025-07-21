@@ -1,0 +1,19 @@
+name: Deploy to GitHub Pages
+on:
+  push:
+    branches: [ main ]
+permissions:
+  pages: write
+  contents: write
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with: node-version: 18
+      - uses: skywarth/vite-github-pages-deployer@v1.5.0
+        with:
+          public_base_path: /neuropharm-ai-genesis/
+          build_path: ./dist
+          package_manager: npm
