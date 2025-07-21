@@ -1,0 +1,35 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [ main ]  # Esta acción se ejecutará cuando haya un push en la rama `main`
+
+permissions:
+  pages: write  # Permisos para escribir en GitHub Pages
+  contents: write  # Permisos para modificar los contenidos del repositorio
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest  # Usamos una máquina virtual con Ubuntu
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3  # Este paso obtiene el código fuente del repositorio
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'  # Usamos la versión de Node.js 18 para instalar dependencias
+
+      - name: Install dependencies
+        run: npm install  # Instalar las dependencias de Node.js
+
+      - name: Build the project
+        run: npm run build  # Construir el proyecto con Vite
+
+      - name: Deploy to GitHub Pages
+        uses: skywarth/vite-github-pages-deployer@v1.5.0  # Usamos el action para desplegar en GitHub Pages
+        with:
+          public_base_path: /neuropharm-ai-genesis/  # Reemplaza con el nombre de tu repositorio (en minúsculas y sin espacios)
+          build_path: ./dist  # Ruta donde se generan los archivos construidos por Vite
+          package_manager: npm  # Usamos npm como gestor de paquetes
